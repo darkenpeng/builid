@@ -4,7 +4,7 @@ import ToppingsSummary from '../Toppings/ToppingsSummary';
 import CartContext from '../../store/cartContext';
 import { useContext } from 'react';
 
-const Select = ({ showSelectModalHandler, hideSelectModalHandler, showSubCartHandler, backendData, setBackendData, selectedCategory, setSelectedCategory, selectModalIsShown }) => {
+const SelectTopping = ({ showSelectModalHandler, hideSelectModalHandler, showSubCartHandler, backendData, setBackendData, selectedCategory, setSelectedCategory, selectModalIsShown }) => {
   // console.log('왜')
   const { onSave } = useContext(CartContext);
 
@@ -13,6 +13,7 @@ const Select = ({ showSelectModalHandler, hideSelectModalHandler, showSubCartHan
     showSelectModalHandler();
   }
 
+  console.log('backendData: ', backendData)
   return (
     <>
       <ToppingsSummary />
@@ -43,4 +44,4 @@ const Select = ({ showSelectModalHandler, hideSelectModalHandler, showSubCartHan
   );
 };
 
-export default Select;
+export default SelectTopping;

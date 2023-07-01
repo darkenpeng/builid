@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import CartIcon from '../Cart/CartIcon';
-import classes from './MainHeaderCartButton.module.css';
+import classes from './NavigationCartButton.module.css';
 import CartContext from '../../store/cartContext';
 
-const MainHeaderCartButton = ({ onClick }) => {
+const NavigationCartButton = ({ onClick }) => {
   const {subCartItems} = useContext(CartContext);
   
   const numberOfCartItems = subCartItems.reduce((curNumber, item) => {
@@ -21,4 +21,4 @@ const MainHeaderCartButton = ({ onClick }) => {
   );
 };
 
-export default MainHeaderCartButton;
+export default NavigationCartButton;
