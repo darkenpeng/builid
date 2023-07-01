@@ -6,7 +6,7 @@ import SelectTopping from './components/SelectTopping/SelectTopping';
 import SubCartModal from './components/Cart/SubCartModal';
 import './App.css';
 
-function App() {
+const App = () => {
   const [backendData, setBackendData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('ca2');
   const [mainCartIsShown, setMainCartIsShown] = useState(false);
