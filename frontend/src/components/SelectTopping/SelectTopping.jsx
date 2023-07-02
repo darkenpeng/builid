@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import SelectToppingModal from './SelectToppingModal';
-import ToppingsSummary from '../Toppings/ToppingsSummary';
 import CartContext from '../../store/cartContext';
 import { useContext } from 'react';
 
@@ -16,7 +15,6 @@ const SelectTopping = ({ showSelectModalHandler, hideSelectModalHandler, showSub
   console.log('backendData: ', backendData)
   return (
     <>
-      <ToppingsSummary />
       <ul>
         {backendData[0].yogurtData[0].DUMMY_TOPPINGS.map((yogurt) => {
           return (
