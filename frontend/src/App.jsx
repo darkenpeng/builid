@@ -5,7 +5,6 @@ import Board from './pages/Board';
 import About from './pages/About';
 import MyPage from './pages/MyPage';
 import Cart from './pages/Cart';
-
 const router = createBrowserRouter([
   {
     path: '/',
