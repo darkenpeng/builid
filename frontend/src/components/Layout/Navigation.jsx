@@ -6,8 +6,8 @@ import styled from "styled-components";
 const Navigation = ({ showMainCartHandler }) => {
 
   return (
-    <>
-      <Header>
+    <header>
+      <Nav>
         <StyledAnchor href='/'>GreekZik</StyledAnchor>
         <StyledLink to='/'>그릭요거트</StyledLink>
         <StyledLink to='/board'>게시판</StyledLink>
@@ -15,12 +15,12 @@ const Navigation = ({ showMainCartHandler }) => {
         <StyledLink to='/mypage'>내 정보</StyledLink>
         <StyledLink to='/cart'>장바구니</StyledLink>
         <NavigationCartButton onClick={showMainCartHandler} />
-      </Header>
-    </>
+      </Nav>
+    </header>
   );
 };
 
-const Header = styled.header`
+const Nav = styled.nav`
   display: flex;
   justify-content: space-around;
   align-items: center;
