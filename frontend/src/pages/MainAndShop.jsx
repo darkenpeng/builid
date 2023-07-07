@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import MainCartModal from '../components/Cart/MainCartModal';
 import React, { useState, useEffect } from 'react';
 import CartProvider from '../store/CartProvider';
@@ -5,35 +6,19 @@ import SelectTopping from '../components/SelectTopping/SelectTopping';
 import SubCartModal from '../components/Cart/SubCartModal';
 import './MainAndShop.module.css';
 
+const fetchBackendData = async () => {
+  const response = await fetch('https://greek-yogurt-order-app-17351-default-rtdb.firebaseio.com/data.json');
+  const data = await response.json();
+  return data;
+};
+
 const MainAndShop = () => {
-  const [backendData, setBackendData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('ca2');
   const [mainCartIsShown, setMainCartIsShown] = useState(false);
   const [subCartIsShown, setSubCartIsShown] = useState(false);
-  // const [isLoading, setIsLoading] = useState(false);
-  const [status, setStatus] = useState('init');
   const [selectModalIsShown, setSelectModalIsShown] = useState(false);
+  const { data: backendData, status } = useQuery(['backendData'], fetchBackendData);
 
-  const fetchData = async () => {
-    setStatus('loading');
-
-    try {
-    const response = await fetch('https://greek-yogurt-order-app-17351-default-rtdb.firebaseio.com/data.json');
-    const data = await response.json();
-    // setIsLoading을 같은 핸들러에서 써도 되는 이유: await로 시간차가 생기기 때문에
-    
-    setStatus('loaded');
-    setBackendData(data);
-    } catch(error) {
-      console.log('error: ', error)
-    }
-  }
-
-  useEffect(() => {
-    // console.log('useEffect 시작')
-    fetchData();
-  }, [])
-  
   const showMainCartHandler = () => {
     setMainCartIsShown(true);
   }
@@ -59,28 +44,31 @@ const MainAndShop = () => {
   }
 
 
-  if (status === 'loading' || status === 'init') {
-    return <div>Loading...</div>
-  } else if (status === 'loaded') {
-    return (
-      <CartProvider>
-        {mainCartIsShown &&<MainCartModal hideMainCartHandler={hideMainCartHandler} />}
-        <main>
-        {subCartIsShown &&<SubCartModal hideSubCartHandler={hideSubCartHandler} />}
-          <SelectTopping
-            selectModalIsShown={selectModalIsShown}
-            showSelectModalHandler={showSelectModalHandler}
-            hideSelectModalHandler={hideSelectModalHandler} 
-            showSubCartHandler={showSubCartHandler}
-            backendData={backendData} 
-            setBackendData={setBackendData} 
-            selectedCategory={selectedCategory}  
-            setSelectedCategory={setSelectedCategory}
-          />
-        </main>
-      </CartProvider>
-    );
+  if (status === 'loading') {
+    return <div>로딩 중...</div>
   }
-}
+  
+  if (status === 'error') {
+    return <div>무언가 문제가 발생했습니다.</div>
+  }
+
+  return (
+    <CartProvider>
+      {mainCartIsShown &&<MainCartModal hideMainCartHandler={hideMainCartHandler} />}
+      <main>
+      {subCartIsShown &&<SubCartModal hideSubCartHandler={hideSubCartHandler} />}
+        <SelectTopping
+          selectModalIsShown={selectModalIsShown}
+          showSelectModalHandler={showSelectModalHandler}
+          hideSelectModalHandler={hideSelectModalHandler} 
+          showSubCartHandler={showSubCartHandler}
+          backendData={backendData} 
+          selectedCategory={selectedCategory}  
+          setSelectedCategory={setSelectedCategory}
+        />
+      </main>
+    </CartProvider>
+    );
+  };
 
 export default MainAndShop;
