@@ -7,6 +7,7 @@ import Board from './pages/Board';
 import About from './pages/About';
 import MyPage from './pages/MyPage';
 import Cart from './pages/Cart';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -26,7 +27,7 @@ const queryClient = new QueryClient()
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   )
