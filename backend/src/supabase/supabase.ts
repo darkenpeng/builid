@@ -19,7 +19,6 @@ export const SupabaseProvider = {
       process.env.API_KEY,
       options,
     );
-    console.log(process.env.PROJECT_URL, process.env.API_KEY);
     return supabase;
   },
 };

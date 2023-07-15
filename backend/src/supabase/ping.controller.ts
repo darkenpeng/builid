@@ -9,7 +9,7 @@ export class PingController {
   @Get()
   async ping(): Promise<any[]> {
     const { data } = await this.supabase.from('temp').select('*');
-    console.log(data);
+
     return data;
   }
 }
